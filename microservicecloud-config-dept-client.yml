@@ -39,3 +39,38 @@ info:
    build.artifactId: $project.artifactId$
    build.version: $project.version$
 ---
+server:
+  port: 8001  #注册中心占用7001端口
+
+spring:
+  profiles: test
+  application:
+    name: microservicecloud-config-config-dept-client
+    datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: org.gjt.mm.mysql.Driver
+      url: jdbc:mysql://localhost:3306/clouddb02?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+      dbcp2:
+        min-idle: 5
+        initial-size: 5
+        max-total: 5
+        max-wait-millis: 200
+mybatis:
+   config-localtion: classpath:mybatis/mybatis.cfg.xml
+   type-aliases-package: com.water.springcloud.entities
+   mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: dept-8001.com
+    prefer-ip-address: true
+info:
+   app.name: water-microservicecloud-springcloudconfig01
+   company.name: www.water.com
+   build.artifactId: $project.artifactId$
+   build.version: $project.version$
